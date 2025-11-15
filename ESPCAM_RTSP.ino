@@ -259,8 +259,8 @@ void setup()
     config.pin_reset = RESET_GPIO_NUM;
     config.xclk_freq_hz = 20000000;
     config.pixel_format = PIXFORMAT_JPEG;
-    config.frame_size = FRAMESIZE_SVGA;
-    config.jpeg_quality = 12; 
+    config.frame_size = FRAMESIZE_SVGA; // FRAMESIZE_VGA  (640x480)
+    config.jpeg_quality = 12; // (чем выше число, тем ниже качество, но меньше размер)
     config.fb_count = 2;       
   
     #if defined(CAMERA_MODEL_ESP_EYE)
@@ -351,12 +351,12 @@ void loop()
 #endif
 
 #ifdef ENABLE_RTSPSERVER
-    uint32_t msecPerFrame = 100;
+    uint32_t msecPerFrame = 100; // было 100
     static uint32_t lastimage = millis();
 
     if(session) {
         // Обрабатываем запросы с таймаутом для обеспечения отзывчивости
-        session->handleRequests(10);  // 10ms таймаут вместо 0
+        session->handleRequests(10);  // 5ms таймаут, было 10ms вместо 0 
         
         uint32_t now = millis();
         if(now > lastimage + msecPerFrame || now < lastimage) {
