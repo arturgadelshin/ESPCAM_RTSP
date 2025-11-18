@@ -69,7 +69,7 @@ WebServer server(80);
 #endif
 
 #ifdef ENABLE_RTSPSERVER
-WiFiServer rtspServer(8554);
+WiFiServer rtspServer(554);
 #endif
 
 #ifdef SOFTAP_MODE
